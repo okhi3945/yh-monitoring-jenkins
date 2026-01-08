@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # - job_name: 'aws-ec2' # SG Ingress Port 9100
+  #   static_configs:
+  #     - targets: ['<EC2-IP>:9100']
+
+  # s3, Rds, ELB Monitoring -> Cloud watch 
+  # Connections - Data Sources - Add Prometheus, CloudWatch
+  # Import Dashboard or New Dashboard
+  # New Dashboard - Add Visualization - Set NameSpace, Metric Name
+  - job_name: 'eks-nodes'
+    static_configs:
+      - targets: ['<EKS_NODE_EXPORTER_EXTERNAL_IP>:9100']
+
+  - job_name: 'eks-cluster-metrics'
+    static_configs:
+      # kube-state-metrics 주소
+      - targets: ['<EKS_KUBE_STATE_METRICS_EXTERNAL_IP>:8080']
