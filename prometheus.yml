@@ -12,7 +12,7 @@ scrape_configs:
 
   # - job_name: 'aws-ec2' # SG Ingress Port 9100
   #   static_configs:
-  #     - targets: ['<EC2-IP>:9100']
+  #     - targets: ['<EC2-IP>:9101']
 
   # s3, Rds, ELB Monitoring -> Cloud watch 
   # Connections - Data Sources - Add Prometheus, CloudWatch
@@ -20,9 +20,8 @@ scrape_configs:
   # New Dashboard - Add Visualization - Set NameSpace, Metric Name
   - job_name: 'eks-nodes'
     static_configs:
-      - targets: ['<EKS_NODE_EXPORTER_EXTERNAL_IP>:9100']
+      - targets: ['host.docker.internal:9101']
 
   - job_name: 'eks-cluster-metrics'
     static_configs:
-      # kube-state-metrics 주소
-      - targets: ['<EKS_KUBE_STATE_METRICS_EXTERNAL_IP>:8080']
+      - targets: ['host.docker.internal:8080']

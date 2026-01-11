@@ -29,13 +29,13 @@ services:
     restart: always
     user: root
     ports:
-      - "8088:8080"
+      - "8088:8080" # 외부 접속 포트 8088
       - "50000:50000"
     volumes:
       - ./jenkins_home:/var/lib/jenkins
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
-      - \\wsl.localhost\Ubuntu\home\okhi3\.kube:/root/.kube:ro
-      - \\wsl.localhost\Ubuntu\home\okhi3\yh-ticketing:/var/jenkins_home/workspace/yh-ticketing
+      - /home/okhi3/.kube:/root/.kube:ro
+      - /home/okhi3/yh-ticketing:/var/jenkins_home/workspace/yh-ticketing
     environment:
       - JAVA_OPTS=-Xmx512m
